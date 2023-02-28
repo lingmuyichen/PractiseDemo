@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>省市区三级联动</title>
+	</head>
+	<body>
+		<select name="" id="province" onchange="showCity(this)">
+			<option value="">---请选择---</option>
+		</select>
+		<select name="" id="city" onchange="showDistrict(this)">
+			<option value="">---请选择---</option>
+		</select>
+		<select name="" id="district">
+			<option value="">---请选择---</option>
+		</select>
+		<!-- 如果是用了button触发的ajax请求，将button的类型改为type=“button” 因为浏览器会认为button按钮默认类型是submit ，会提交数据从而导致整个页面刷新 -->
+		<button type=“button” onclick="getdata()">获取数据</button>
+		<script>
+			let province = document.getElementById("province");
+			let city = document.getElementById("city");
+			let district = document.getElementById("district");
+			let frag = document.createDocumentFragment();
+			// 数据
+			let json = null;
+			// 市的数据
+			let cityData = null;
+			// 区的数据
+			let districtData = null;
+
+			function getdata() {
+				//  原生js读取JSON方法  https://www.jianshu.com/p/df9adc286f56
+				//  对象属性没有迭代器,因为对象内部结构可能很复杂,有函数,有数组,有数字.不知道从哪里开始遍历
+				// 经过验证当for in 遍历数组的时候,取的是index下标识
+				// index索引为字符串数字，不能直接进行几何运算
+				// 遍历顺序有可能不是按照实际数组的内部顺序
+				// let arr = [{"name":1},{"name":2},{"name":3}];
+				/* for (let i in arr) {
+					
+				  console.log(i)
+				  let res = i + 1
+				  console.log(res)
+				};
+				var arrs = [1,2,3] */
+				// arr.a = 123
+				// Array.prototype.a = 123
+
+				// for (let value of arrs) {
+				// for of遍历的是数组元素值，而且for of遍历的只是数组内的元素，不包括原型属性和索引
+				//   console.log(value) 
+				//   number
+				// }
+				// ../data/area.json
+				const url = "../data/area.json";
+				// const key = "5UVBZ-Q3KC2-XABUX-C5LOU-LAIQ5-KMF6J";
+				// https://apis.map.qq.com/ws/district/v1/getchildren // get请求 
+				const request = new XMLHttpRequest();
+				// const key = JSON.stringify({
+				// 	key:'OB4BZ-D4W3U-*'
+				// })
+				// fetch(url)
+				// 	.then((res) => {
+				// 		return res.json();
+				// 	})
+				// 	.then((data) => {
+				// 		alert(JSON.stringify(data));
+						
+				// 	})
+				request.open("get", url);
+				request.send();
+				request.onload = function() {
+					if (request.status == 200) {
+						json = JSON.parse(request.responseText);
+						// for in只能获取对象的键或索引，不能获取值。
+						// for ... in是为遍历对象属性而构建的
+						// for of可以获取对象的值，for of遍历JSON会报错。
+						// json.forEach(item =>{
+						// 	console.log(item[1])
+						// })
+
+
+						for (let i = 0; i < json.length; i++) {
+							// 创建一个对象,配合appendChild() ,动态生成元素。需要放在里面，不然只生成了一条
+							//  循环的坑有很多，有些操作需要一起执行的时候，切记切记放在循环里面一起
+							//  当在循环里面写判断，切记条件一定要写充分。否则执行次数会不一样
+							let provOpt = document.createElement('option');
+							provOpt.value = provOpt.innerText = json[i].value;
+							province.appendChild(provOpt);
+						}
+					}
+				}
+			};
+
+
+			function showCity(obj) {
+				// console.log(city.children[1].remove(city.children[1]))
+				// selectedIndex 属性可设置或返回下拉列表中被选选项的索引号。
+				/* 因为option下标0是请选择，自动忽略，使用下标应该是从1开始，-1正好对应JSON中的length 0*/
+				cityData = json[obj.selectedIndex - 1].children;
+				// 进来先清空所有的option ,保留第一个
+				city.innerHTML = "";
+				district.innerHTML = "";
+				clears(city);
+				clears(district);
+				for (let i = 0; i < cityData.length; i++) {
+					let cityOpt = document.createElement('option');
+					cityOpt.value = cityOpt.innerText = cityData[i].value;
+					city.appendChild(cityOpt)
+				}
+			};
+
+			function showDistrict(obj) {
+				district.innerHTML = "";
+				clears(district);
+				districtData = cityData[obj.selectedIndex - 1].children;
+				for (let i = 0; i < districtData.length; i++) {
+					let districtOpt = document.createElement('option');
+					districtOpt.value = districtOpt.innerText = districtData[i].value;
+					district.appendChild(districtOpt)
+				}
+
+			}
+
+			function clears(value) {
+				let firstOptions = document.createElement('option');
+				firstOptions.text = "---请选择---";
+				value.add(firstOptions)
+			}
+		</script>
+	</body>
+</html>

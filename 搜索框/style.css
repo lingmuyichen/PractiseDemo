@@ -1,0 +1,64 @@
+* {
+  box-sizing: border-box;
+}
+body {
+	background-color: cornflowerblue;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.search {
+	position: relative;
+	height: 50px;
+	border-radius:15px;
+}
+
+.search input {
+	background-color: #fff;
+	/* 去掉边框 */
+	border: 0;
+	font-size: 14px;
+	/* 撑开input */
+	padding: 15px;
+	height: 50px;
+	width: 50px;
+	transition: width 0.3s ease;
+}
+
+.btn {
+	background-color: #fff;
+	border: 0;
+	cursor: pointer;
+	font-size: 18px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 50px;
+	width: 50px;
+	transition: transform 0.3s ease;
+}
+
+/* 加圆角 */
+.search > .btn, .search > .input{
+	border-radius: 15px;
+}
+/* 逗号共用相同样式，focus聚焦事件 */
+.btn:focus,.input:focus {
+  outline: none;
+}
+
+.search.active .input {
+  width: 200px;
+  
+  border-radius: 15px 0 0 15px;
+}
+
+.search.active .btn{
+	/* 平移动画 */
+	transform: translateX(198px);
+	
+	border-radius: 0 15px 15px 0;
+}

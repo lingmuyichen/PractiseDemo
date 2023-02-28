@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>顺时针旋转</title>
+		<style>
+			#box {
+				height: 200px;
+				width: 200px;
+				background: #A52A2A;
+				border-radius: 50%;
+				font-size: 100px;
+				font-family: "微软雅黑";
+				text-align: center;
+				line-height: 200px;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">1</div>
+		<script>
+			let box = document.getElementById("box");
+			let i = 10;
+			// 思路做一个定时器，不断改变transform的位置
+			setInterval(() =>{
+				i++
+				box.style.transform = "rotate("+i+"deg)"
+			},20)
+		</script>
+	</body>
+</html>

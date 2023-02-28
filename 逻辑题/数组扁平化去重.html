@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// 将数组扁平化，去重
+			//  最终得到一个升序且不重复的数组
+			var arr = [
+				[1,2,3],
+				[3,4,5,5],
+				[6,7,8,9],
+				[11,12,[12,12,[13]]],
+				10,
+				]
+			//  因为要用到this,不能使用箭头函数
+			//  1.数组扁平化
+			Array.prototype.flat = function() {
+			    const result = this.map(item =>{
+					// 判断是否是一个数组
+					if(Array.isArray(item)){
+					   return item.flat();
+					}
+					return [item]
+				})
+				 // 将一个空数组和值包裹在一起
+				return [].concat(...result);
+			}
+			
+			//  2.去重
+			// https://blog.csdn.net/yiyueqinghui/article/details/107773347
+			// Set是es6新增的数据结构，似于数组，但它的一大特性就是所有元素都是唯一的，没有重复的值，我们一般称为集合。
+			/*
+			 console.log(typeof(new Set))
+			 object
+			 */
+			// es6的...解构 Z去重后转数组
+			Array.prototype.unique = function(){
+				console.log(this)
+				return  [...new Set(this)];
+			};
+			//  3.排序
+			/* 
+			 正数 a>b 倒序
+			 0 顺序不变
+			 负数 a,b  a<b 升序
+			 */
+			// const sortFn = (a,b) => a - b;
+			[...new Set(arr.flat(Infinity))].sort((a,b) => a - b);
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>点击事件</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box{
+				width: 300px;
+				height:300px;
+				background: brown;
+				color: #fff;
+				font-size: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 点击事件（点击一次红色区域出现一个效果，最后一步全部消失） -->
+		<div id="box" onclick="myclick()">
+			<p>请点击</p>
+		</div>
+		<script>
+			let div	= document.getElementById("box");
+			let p = document.querySelector("p");
+			let i = 0;
+			function myclick(){
+				i++
+				switch (i){
+					case 1: p.innerText ="请再次点击"
+						break;
+					case 2: p.innerText ="谢谢"
+						break;
+					case 3: p.innerText ="再见"
+						break;
+					case 4: div.style.display ="none"
+						break;
+					default:
+						break;
+				}
+			};
+		</script>
+	</body>
+</html>

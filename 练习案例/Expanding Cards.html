@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Expanding Card</title>
+		<style>
+			.out{
+				width: 50%;
+				height: 1200px;
+				display: flex;
+			}
+			.piccolor{
+				margin: 15px 5px;
+				width: 60px;
+				height: 200px;
+				border-radius: 30px;
+			}
+			.active{
+				width: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="out" class="out">
+				<div id="pic1" class="piccolor active" style="background-color: #0000ff;"></div>
+				<div id="pic2" class="piccolor" style="background-color: #aa00ff;"></div>
+				<div id="pic3" class="piccolor" style="background-color: #ffaa7f;"></div>
+				<div id="pic4" class="piccolor" style="background-color: #ff0000;"></div>
+				<div id="pic5" class="piccolor" style="background-color: #55ff7f;"></div>
+		</div>
+		<script>
+			let pic = document.querySelectorAll(".piccolor")
+			// let out = document.getElementById("out")
+			// console.log(out.children)
+			console.log(pic)
+			pic.forEach(item => {
+			    item.addEventListener('click',() => {
+					// 将类数组转换为数组,需要用到call,call会改变this指向,第一个参数就是指向、
+					// 把所有div和点击的那个item做对比，将其他div都清空active属性，把点击的item附上active
+					
+			       [].filter.call(item.parentElement.children,el => el !== item).forEach(el => el.classList.remove('active'));
+			       item.classList.add('active')
+			    });
+			});
+		</script>
+	</body>
+</html>

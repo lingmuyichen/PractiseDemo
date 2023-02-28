@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>显示隐藏效果</title>
+	</head>
+	<body>
+		<button id="bth">隐藏图片</button>
+		<img src="../img/blue.jpg" alt="">
+		<script>
+			let img = document.getElementsByTagName("img")[0]
+			let btn = document.getElementsByTagName("button")[0]
+			console.log(btn)
+			btn.addEventListener("click", function myFunction(){
+				if(btn.innerText=="隐藏图片"){
+					btn.innerText="显示图片"
+					img.style.display ="none"
+				}else{
+					btn.innerText="隐藏图片"
+					img.style.display ="inline-block"
+				}
+			});
+			
+			// btn.addEVentListener("click",)
+		</script>
+	</body>
+</html>
