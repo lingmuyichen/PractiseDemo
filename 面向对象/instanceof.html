@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// instanceof 用来检查一个对象是否是一个类的实例
+			class Preson {
+				name = "孙悟空";
+				sayHello(){
+					 console.log("动物在叫")
+				}
+			}
+			const p = new Preson()
+			// 使用in运算符检查属性时，无论属性在对象自身还是原型中，都会返回true
+			console.log("name" in p)
+			console.log(Object.hasOwn(p,"name"))
+			/*  
+			对象.hasOwnProerty(属性名) 
+			 用来检查一个对象自身是否有这个属性
+			Object.hasOwn(对象,属性名)
+			用来检查一个对象自身是否有这个属性
+			*/
+		</script>
+	</body>
+</html>

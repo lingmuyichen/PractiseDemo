@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			class Animal{
+				/*
+				 继承
+				  可以通过继承不修改一个类的情况下对其进行扩展
+				 */
+			  constructor(name){
+				  this.name = name
+			  }
+			  sayHello(){
+				  console.log("动物在叫")
+			  }
+			}
+			// 可以通过extends 关键字来完成继承
+			//  当一个类继承另一个类，就相当继承了
+			//  继承发生时,被继承的类称为父类,继承的类称为子类
+			//  通过继承可以减少重复使用代码
+			class Dog extends Animal{
+				//  在子类中,可以通过创建同名方法来重写父类方法
+				sayHello(){
+					console.log("汪汪汪")
+				}
+			}
+			class Cat extends Animal{
+				// 重写构造函数
+				constructor(name,age){
+					//  重写构造函数,构造函数的第一行必须是Super()
+					super(name) //  调用父类的构造函数
+					this.age = age;
+				}
+				sayHello(){
+					super.sayHello()
+					console.log("喵喵喵")
+				}
+			}
+			const dog = new Dog("旺财");
+			const cat = new Cat("汤姆",33);
+			dog.sayHello();
+			cat.sayHello();
+			console.log(dog);
+			console.log(cat);
+		</script>
+	</body>
+</html>
