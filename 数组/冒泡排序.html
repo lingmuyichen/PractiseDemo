@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>冒泡排序</title>
+	</head>
+	<body>
+		<script>
+			const array1 = [0, 1, 8, 5, 6, 7, 3, 4];
+			for (let j = 0; j < array1.length; j++) {
+				console.log(array1.length- 1)
+				for (let i = 0; i < array1.length - j - 1; i++) {
+					if (array1[i] > array1[i + 1]) {
+						let temp = array1[i];
+						array1[i] = array1[i + 1];
+						array1[i + 1] = temp;
+					}
+
+				}
+			}
+			/* 
+			 [0, 1, 5, 6, 7, 3, 4, 8]
+			 [0, 1, 5, 6, 3, 4, 7, 8]
+			 [0, 1, 5, 3, 4, 6, 7, 8]
+			 [0, 1, 3, 4, 5, 6, 7, 8]
+			 [0, 1, 3, 4, 5, 6, 7, 8]
+			 [0, 1, 3, 4, 5, 6, 7, 8]
+			 [0, 1, 3, 4, 5, 6, 7, 8]
+			 [0, 1, 3, 4, 5, 6, 7, 8]
+			 */
+			/* 
+			 冒泡排序
+				将第一个数和第二个数做对比，当第一个数大于第二个数则交换位置，
+				对比一遍之后，最大的数已经排在了最右侧;
+				此时我们进入第二轮比较
+				对比一遍后，第二大的数排在了右侧第二个位置
+			 */
+
+			const array2 = [0, 1, 8, 5, 6, 7, 3, 4];
+			// 冒泡排序优化
+			let flag = null;
+			for (let j = 0; j < array2.length; j++) {
+				//  加一个标识，当有比较时，标识为false  ，当没有比较时标识为true，退出循环提升性能影响
+				flag = true;
+				// 因为只用比七次所以是减一,并且对比次数减少
+				for (let i = 0; i < array2.length - j - 1; i++) {
+					if (array2[i] > array2[i + 1]) {
+						let temp = array2[i];
+						array2[i] = array2[i + 1];
+						array2[i + 1] = temp;
+						flag = false;
+					}
+				}
+				if (flag) {
+					break
+				}
+			}
+
+
+
+             // [3,4,2,1,5,6,7,8]
+			const array3 = [0, 1, 8, 5, 6, 7, 3, 4];
+			// 冒泡排序优化2
+			let lastExchangeIndex = 0;
+			//无序数列的边界，每次比较只需要比到这里为止
+			let flags = null;
+
+			let sortBorder = array3.length- 1;
+			for (let j = 0; j < array3.length; j++) {
+				let y = 0;
+				flags = true;
+				console.log(sortBorder)
+				for (let i = 0; i < sortBorder; i++) {
+					
+					if (array3[i] > array3[i + 1]) {
+						let temp = array3[i];
+						array3[i] = array3[i + 1];
+						array3[i + 1] = temp;
+						flags = false;
+						lastExchangeIndex = array3[i + 1];
+					}
+				}
+				
+				sortBorder = lastExchangeIndex;
+				// 把无序边界给sortboder,让其循环到无序边界就可以结束了
+				if (flags) {
+					break
+				}
+			}
+			
+		</script>
+	</body>
+</html>

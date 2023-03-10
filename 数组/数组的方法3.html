@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			/* 
+				sort()
+					-compareFn参数，指定某种排序的函数。省略，元素按照转换为的字符串的各个字符的 Unicode 位点进行排序。
+						-函数传a和b两个比较的元素，a拿索引的第二个，b拿索引的第一个
+						比较规则是
+						返回值compareFn(a, b) > 0	则b 在前 a在后
+						返回值compareFn(a, b) < 0	则a 在前 b在后
+						返回值compareFn(a, b) === 0	则保持 a 和 b 的顺序
+					返回值：返回排序好的原数组
+			 */
+			const array1 = [33,40, 1, 5, 200];
+			40 
+			
+			// 从小到大排序
+			const array2 =  array1.sort((a,b) => a-b);
+			console.log(array2);
+			
+			// 按照指定顺序排序
+			let order = ['论坛','微信','微博']
+			let tableData=[{name:'微博',source:'weibo'},{name:'微信',source:'weixin'},{name:'论坛',source:'luntan'}]
+			tableData = tableData.sort((a, b) => {
+			return order.indexOf(a.name) - order.indexOf(b.name)
+			})
+			console.log(tableData)
+			
+			
+			const items = [
+			  { name: 'Edward', value: 21 },
+			  { name: 'Sharpe', value: 37 },
+			  { name: 'And', value: 45 },
+			  { name: 'The', value: -12 },
+			  { name: 'Magnetic', value: 13 },
+			  { name: 'Zeros', value: 37 }
+			];
+			
+			// sort by value
+			items.sort((a, b) => a.value - b.value);
+			
+			// sort by name
+			
+			// toUpperCase 将字符串转为大写返回，不是字符串会强制转换
+			// 字符串的比大小规则不是比长度，是比小写和a~z。小写大于大写，A大于B
+			items.sort((a, b) => {
+			  const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+			  const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+			  if (nameA < nameB) {
+			    return -1;
+			  }
+			  if (nameA > nameB) {
+			    return 1;
+			  }
+			
+			  // names must be equal
+			  return 0;
+			});
+			console.log("1".toUpperCase())
+		</script>
+	</body>
+</html>
